@@ -142,8 +142,8 @@ public class ChangeCurrency {
 	static BigDecimal getConvertedAmount(String currencyOne, String currencyTwo, BigDecimal balance) {
 		System.out.println("STAGE 1: Inside getConvertedAmount");
 		BigDecimal convertedAmount= new BigDecimal(0);
-		String apiUrl = "https://api.freecurrencyapi.com/v1/latest?apikey=DzE9j6baYbAttkoiGoWIvHO2DbetE62tY4elb93c&currencies="+currencyTwo;
-		
+//		String apiUrl = "https://api.freecurrencyapi.com/v1/latest?apikey=DzE9j6baYbAttkoiGoWIvHO2DbetE62tY4elb93c&currencies="+currencyTwo;
+		String apiUrl = "https://api.freecurrencyapi.com/v1/latest?apikey=DzE9j6baYbAttkoiGoWIvHO2DbetE62tY4elb93c&currencies="+currencyTwo+"&base_currency="+currencyOne;		
 		
 		try {
 			System.out.println("STAGE 2: Inside try block");
@@ -173,7 +173,7 @@ public class ChangeCurrency {
 				JSONObject jObject = new JSONObject(response.body());
 				
 				JSONObject data = jObject.getJSONObject("data"); // get data object
-				BigDecimal currecyRate = data.getBigDecimal("INR");
+				BigDecimal currecyRate = data.getBigDecimal(currencyTwo);
 				
 				System.out.println("Currency Rate:"+currecyRate);
 				
